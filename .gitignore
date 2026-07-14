@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# testing
+coverage/
+
+# build output
+dist/
+*.tsbuildinfo
+
+# vite
+.vite/
+
+# go server local state
+example/server/comments.db*
+example/server/server
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "jsx": "react-jsx"
+  },
+  "references": [{ "path": "../y-comments-core" }, { "path": "../y-comments-prosemirror" }],
+  "include": ["src"]
+}

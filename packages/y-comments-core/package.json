@@ -1,0 +1,32 @@
+{
+  "name": "@defensestation/y-comments-core",
+  "description": "Editor-agnostic core for decoration-anchored comments on Yjs documents: thread data model, ThreadStore interface, quote matching and the anchor resolution fallback chain.",
+  "keywords": ["yjs", "comments", "annotations", "crdt"],
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "yjs": "^13.6.0"
+  },
+  "devDependencies": {
+    "yjs": "^13.6.31"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/defensestation/y-comments",
+    "directory": "packages/y-comments-core"
+  },
+  "license": "MIT"
+}

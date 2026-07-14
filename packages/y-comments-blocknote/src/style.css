@@ -1,0 +1,371 @@
+/* @defensestation/y-comments — themed via BlockNote CSS variables
+   (--bn-colors-*) with standalone fallbacks, so components work both inside
+   and next to a BlockNoteView. Override the --y-comments-* variables to
+   re-skin. */
+
+:root {
+  --y-comments-highlight-bg: rgba(252, 188, 3, 0.35);
+  --y-comments-highlight-active-bg: rgba(252, 188, 3, 0.6);
+  --y-comments-bg: var(--bn-colors-menu-background, #ffffff);
+  --y-comments-text: var(--bn-colors-menu-text, #3f4045);
+  --y-comments-muted: var(--bn-colors-side-menu, #cfcfcf);
+  --y-comments-border: var(--bn-colors-border, #efefef);
+  --y-comments-accent: var(--bn-colors-highlights-blue-background, #307bf6);
+  --y-comments-radius: var(--bn-border-radius, 6px);
+  --y-comments-font: var(
+    --bn-font-family,
+    "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif
+  );
+  --y-comments-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+}
+
+/* Dark theme is opt-in so the comment UI always matches the editor rather
+   than the OS: set data-y-comments-theme="dark" on any ancestor (e.g.
+   <html> or your app root), typically alongside BlockNoteView's
+   theme="dark". */
+[data-y-comments-theme="dark"] {
+  --y-comments-bg: var(--bn-colors-menu-background, #1f1f1f);
+  --y-comments-text: var(--bn-colors-menu-text, #cfcfcf);
+  --y-comments-border: var(--bn-colors-border, #353535);
+  --y-comments-shadow: 0 4px 12px rgb(0 0 0 / 0.5);
+}
+
+/* ---------- editor highlights (decorations) ---------- */
+
+.y-comments-highlight {
+  background: var(--y-comments-highlight-bg);
+  border-bottom: 2px solid var(--y-comments-highlight-active-bg);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.y-comments-highlight.y-comments-active,
+.y-comments-highlight:hover {
+  background: var(--y-comments-highlight-active-bg);
+}
+
+@keyframes y-comments-flash-frames {
+  0%, 60% { background: var(--y-comments-highlight-active-bg); }
+  100% { background: var(--y-comments-highlight-bg); }
+}
+
+.y-comments-flash {
+  animation: y-comments-flash-frames 1.2s ease;
+}
+
+/* Selection being commented on while the composer has focus. */
+.y-comments-pending {
+  background: var(--y-comments-highlight-bg);
+  border-bottom: 2px dashed var(--y-comments-highlight-active-bg);
+}
+
+/* ---------- shared chrome ---------- */
+
+.y-comments-floating,
+.y-comments-sidebar,
+.y-comments-card {
+  font-family: var(--y-comments-font);
+  color: var(--y-comments-text);
+  font-size: 14px;
+}
+
+.y-comments-floating {
+  background: var(--y-comments-bg);
+  border: 1px solid var(--y-comments-border);
+  border-radius: var(--y-comments-radius);
+  box-shadow: var(--y-comments-shadow);
+  padding: 10px;
+  width: 320px;
+  max-height: 420px;
+  overflow-y: auto;
+  z-index: 3000;
+}
+
+.y-comments-composer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.y-comments-input {
+  font-family: inherit;
+  font-size: 14px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--y-comments-border);
+  border-radius: var(--y-comments-radius);
+  padding: 6px 8px;
+  resize: vertical;
+  min-height: 32px;
+}
+
+.y-comments-input:focus {
+  outline: none;
+  border-color: var(--y-comments-accent);
+}
+
+.y-comments-composer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.y-comments-button {
+  font-family: inherit;
+  font-size: 13px;
+  border: 1px solid var(--y-comments-border);
+  background: transparent;
+  color: inherit;
+  border-radius: var(--y-comments-radius);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.y-comments-button-primary {
+  background: var(--y-comments-accent);
+  border-color: var(--y-comments-accent);
+  color: #ffffff;
+}
+
+.y-comments-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.y-comments-icon-button {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: var(--y-comments-radius);
+}
+
+.y-comments-icon-button:hover {
+  opacity: 1;
+  background: var(--y-comments-border);
+}
+
+.y-comments-error {
+  color: #d33131;
+  font-size: 12px;
+}
+
+/* ---------- thread & comments ---------- */
+
+.y-comments-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Long threads scroll in the middle; header, quote and reply box stay put. */
+.y-comments-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  max-height: var(--y-comments-thread-max-height, 280px);
+  overscroll-behavior: contain;
+}
+
+.y-comments-thread-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 20px;
+}
+
+.y-comments-thread-header-spacer {
+  flex: 1;
+}
+
+.y-comments-badge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--y-comments-highlight-bg);
+}
+
+.y-comments-badge-resolved {
+  background: rgba(48, 209, 88, 0.25);
+}
+
+.y-comments-quote {
+  margin: 0;
+  padding: 2px 8px;
+  border-left: 3px solid var(--y-comments-highlight-active-bg);
+  color: inherit;
+  opacity: 0.75;
+  font-style: italic;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.y-comments-comment-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.y-comments-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+
+.y-comments-avatar-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--y-comments-accent);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.y-comments-username {
+  font-weight: 600;
+}
+
+.y-comments-timestamp {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.y-comments-comment-actions {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.y-comments-comment:hover .y-comments-comment-actions {
+  opacity: 1;
+}
+
+.y-comments-comment-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding-left: 26px;
+}
+
+.y-comments-reactions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding-left: 26px;
+  align-items: center;
+}
+
+.y-comments-reaction {
+  font-family: inherit;
+  font-size: 12px;
+  border: 1px solid var(--y-comments-border);
+  background: transparent;
+  color: inherit;
+  border-radius: 999px;
+  padding: 1px 8px;
+  cursor: pointer;
+}
+
+.y-comments-reaction-mine {
+  border-color: var(--y-comments-accent);
+  background: color-mix(in srgb, var(--y-comments-accent) 12%, transparent);
+}
+
+.y-comments-reaction-picker-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.y-comments-reaction-picker {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--y-comments-bg);
+  border: 1px solid var(--y-comments-border);
+  border-radius: var(--y-comments-radius);
+  box-shadow: var(--y-comments-shadow);
+  z-index: 1;
+}
+
+/* ---------- sidebar ---------- */
+
+.y-comments-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 280px;
+}
+
+.y-comments-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.y-comments-sidebar-title {
+  font-weight: 700;
+}
+
+.y-comments-filter {
+  display: inline-flex;
+  border: 1px solid var(--y-comments-border);
+  border-radius: var(--y-comments-radius);
+  overflow: hidden;
+}
+
+.y-comments-filter-button {
+  font-family: inherit;
+  font-size: 12px;
+  padding: 3px 10px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.y-comments-filter-button-active {
+  background: var(--y-comments-accent);
+  color: #ffffff;
+}
+
+.y-comments-card {
+  background: var(--y-comments-bg);
+  border: 1px solid var(--y-comments-border);
+  border-radius: var(--y-comments-radius);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.y-comments-card-selected {
+  border-color: var(--y-comments-accent);
+}
+
+.y-comments-group-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  margin-top: 6px;
+}
+
+.y-comments-empty {
+  opacity: 0.6;
+  font-style: italic;
+}

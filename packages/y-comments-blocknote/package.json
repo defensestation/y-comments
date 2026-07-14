@@ -1,0 +1,52 @@
+{
+  "name": "@defensestation/y-comments-blocknote",
+  "description": "Comments for the BlockNote editor that never write to the document: Yjs relative-position anchors in an external store, rendered as ProseMirror decorations.",
+  "keywords": ["comments-plugin", "blocknote", "editor", "comments", "yjs", "decorations"],
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && cp src/style.css dist/style.css",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@defensestation/y-comments-core": "^1.0.0",
+    "@defensestation/y-comments-prosemirror": "^1.0.0",
+    "@floating-ui/react": "^0.27.0"
+  },
+  "peerDependencies": {
+    "@blocknote/core": "^0.51.0",
+    "@blocknote/react": "^0.51.0",
+    "react": "^18.0 || ^19.0",
+    "react-dom": "^18.0 || ^19.0",
+    "yjs": "^13.6.0"
+  },
+  "devDependencies": {
+    "@blocknote/core": "^0.51.4",
+    "@blocknote/react": "^0.51.4",
+    "prosemirror-model": "^1.25.4",
+    "prosemirror-state": "^1.4.4",
+    "prosemirror-view": "^1.41.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "y-prosemirror": "^1.3.7",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.31"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/defensestation/y-comments",
+    "directory": "packages/y-comments-blocknote"
+  },
+  "sideEffects": ["**/*.css"],
+  "license": "MIT"
+}

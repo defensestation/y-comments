@@ -1,0 +1,27 @@
+{
+  "name": "example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "server": "cd server && go run . -addr :8787 -db comments.db",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@blocknote/core": "^0.51.4",
+    "@blocknote/mantine": "^0.51.4",
+    "@blocknote/react": "^0.51.4",
+    "@defensestation/y-comments-blocknote": "^1.0.0",
+    "@defensestation/y-comments-core": "^1.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.31"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.3.5"
+  }
+}

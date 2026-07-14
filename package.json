@@ -1,0 +1,35 @@
+{
+  "name": "y-comments",
+  "description": "Decoration-anchored comments for Yjs-backed editors. Monorepo for @defensestation/y-comments-core, @defensestation/y-comments-prosemirror and @defensestation/y-comments-blocknote.",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "example"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=@defensestation/y-comments-core --workspace=@defensestation/y-comments-prosemirror --workspace=@defensestation/y-comments-blocknote",
+    "test": "vitest run",
+    "typecheck": "tsc -b packages/y-comments-core packages/y-comments-prosemirror packages/y-comments-blocknote",
+    "dev": "npm run dev --workspace=example",
+    "server": "npm run server --workspace=example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/defensestation/y-comments"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-darwin-arm64": "^4.30.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitest/coverage-v8": "^3.2.7",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.6.3",
+    "vitest": "^3.2.4"
+  }
+}
