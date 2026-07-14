@@ -11,6 +11,15 @@ decorations: view-only overlays, never marks.
 | `@defensestation/y-comments-prosemirror` | Anchor creation from selections, decorations plugin, `DocAdapter` binding the resolution chain to a live editor. |
 | `@defensestation/y-comments-blocknote` | React UI for BlockNote ≥ 0.51: provider, toolbar button, floating composer/thread, sidebar. |
 
+## Documentation
+
+- [Quick start](#quick-start-blocknote) and [UI behavior](#ui-behavior) — wire up the BlockNote UI.
+- [How anchoring works](#how-anchoring-works) — the relative-position + quote fallback chain.
+- [Thread stores](#thread-stores) and the [REST contract](#rest-contract) — the storage interface and the reference HTTP shape.
+- [Transports & store wrappers](docs/transports.md) — WebSocket / gRPC-stream adapters (`PushThreadStore`), optimistic updates (`OptimisticThreadStore`), and a production composition.
+- [Example app](example/README.md) — runnable BlockNote + comments demo with multi-user auth and cross-tab sync.
+- [Reference server](example/server/README.md) — Go + SQLite implementation of the REST contract.
+
 ## Why decorations, not marks?
 
 Every existing option (BlockNote comments, Liveblocks, Tiptap Comments)
